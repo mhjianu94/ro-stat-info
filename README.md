@@ -1,2 +1,2 @@
 # ro-stat-info
-Aplicatie pentru display statictici
+Aplicatie pentru display statistici
