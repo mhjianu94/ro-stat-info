@@ -22,8 +22,18 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/, // Transformă fișierele .css
-        use: ['style-loader', 'css-loader'] // Adaugă CSS în DOM prin JS
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[name][ext]'
+        }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader', // Injectează CSS în DOM
+          'css-loader'    // Permite importul de CSS în JavaScript
+        ]
       }
     ]
   },
