@@ -69,9 +69,11 @@ export class SvgBarChart {
                 state.selection =  element;
                 console.log("Selected: ",state.selection)
                 filterDataByYear();
+                document.getElementById("selected_year_ind").innerText = `An: ${element.an} Indice ${element.indicator}`
 
                 const bubbleChart = new BubbleChart(document.getElementById('bubble_chart_canvas'));
-                bubbleChart.draw();
+                bubbleChart.animate();
+                //bubbleChart.draw();
             })
 
            bar.addEventListener('mousemove', function(event) {
@@ -91,6 +93,7 @@ export class SvgBarChart {
             bar.addEventListener('mouseout', function() {
                 document.getElementById('tooltip').style.display = 'none';
             });
+
         }
 
     }

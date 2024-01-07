@@ -10,14 +10,12 @@ export class BubbleChart {
 
     processedData() {
         const maxValue = Math.max(...state.selectedDataByYear.map(item => item.valoare));
-    
         this.scaleFactor = 100 / maxValue; 
     
         return state.selectedDataByYear.map(item => {
-            const x = Math.random() * this.canvas.width; 
-            const y = Math.random() * this.canvas.height; 
-            const scaledValue = item.valoare * this.scaleFactor;
-            const r = scaledValue; 
+            const r = item.valoare * this.scaleFactor;
+            const x = r + Math.random() * (this.canvas.width - 2 * r); 
+            const y = r + Math.random() * (this.canvas.height - 2 * r);
             const tara = item.tara;
             const culoare = this.getRandomColor(); 
     
@@ -34,9 +32,7 @@ export class BubbleChart {
         return color;
     }
 
-    draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.data.forEach(bubble => {
+    draw(bubble) {
             this.ctx.beginPath();
             this.ctx.arc(bubble.x, bubble.y, bubble.r, 0, 2 * Math.PI);
             this.ctx.fillStyle = bubble.culoare;
@@ -46,20 +42,34 @@ export class BubbleChart {
             this.ctx.font = '14px Arial';
             this.ctx.textAlign = 'center';
             this.ctx.fillText(`${bubble.tara}: ${Math.round(bubble.r / this.scaleFactor)}`, bubble.x, bubble.y);
-        });
-    }
-
-    animate(startYear, endYear) {
-        let currentYear = startYear;
-
-        const step = () => {
-            if (currentYear <= endYear) {
-                this.draw(currentYear);
-                currentYear++;
-                setTimeout(step, 1000); // Ajustați viteza animației
-            }
         };
+    
 
-        step();
+        animate() {
+            let index = 0;
+            const numBubbles = this.data.length;
+        
+            const step = () => {
+                if (index < numBubbles) {
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+                    for (let i = 0; i <= index; i++) {
+                        this.draw(this.data[i]);
+                    }
+
+                    index++;
+                    setTimeout(step, 200); 
+                }
+            };
+        
+            step();
+        }
+
+    updateDataForStep() {
+        this.data.forEach(bubble => {
+            const r = bubble.r;
+            bubble.x = r + Math.random() * (this.canvas.width - 2 * r);
+            bubble.y = r + Math.random() * (this.canvas.height - 2 * r);
+        });
     }
 }
