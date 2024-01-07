@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
    
-    <title>Dashboard UE</title>
+    <title>Dashboard Date UE</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></head>
 </head>
 
@@ -38,15 +38,13 @@
         <header class="d-flex align-items-center pb-3 mb-5 border-bottom pt-5">
             <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none">
                 <img src="assets/crowd.png" class="bi me-2" width="40" height="32" alt="Icon">
-                <span class="fs-4">Starter template</span>
+                <span class="fs-4">Date Statistice UE</span>
             </a>
         </header>
 
         <main>
-            <h1 class="text-body-emphasis">Get started with Bootstrap</h1>
+            <h1 class="text-body-emphasis">Date statistice PIB/SV/Pop </h1>
             <p class="fs-5 col-md-8">Quickly and easily get started with Bootstrap's compiled, production-ready files with this barebones example featuring some basic HTML and helpful links. Download all our examples to get started.</p>
-
-           
 
             <hr class="mb-5">
             <div class="row g-5"></div>
@@ -80,16 +78,22 @@
             </div>
             <hr class="mb-5">
             <div class="row g-5"></div>
-
             <div class="chart-controls">
               <a id= "SV" class="btn btn-dark btn-sm px-3 chart-button-controls buttonIndicator">Speranta Viata</a>
               <a id= "Pop" class="btn btn-dark btn-sm px-3 chart-button-controls buttonIndicator">Populatie</a>
               <a id= "PIB" class="btn btn-dark btn-sm px-3 chart-button-controls buttonIndicator">PIB</a>
             </div>
             <hr class="mb-5">
+            <p id= "selected_filters" class="fs-5 col-md-8">Filtre:</p>
 
             <div id="chart_div" class="chart_div"></div>
-        </main>
+            <div id="tooltip" style="position: absolute; display: none; background-color: white; border: 1px solid black; padding: 5px;"></div>
+            
+            <hr class="mb-5">
+            <canvas id="bubble_chart_canvas" width="600" height="400"></canvas>
+
+        
+          </main>
         <footer class="pt-5 my-5 text-body-secondary border-top">
             Proiect Jianu Mihai - 2023
         </footer>

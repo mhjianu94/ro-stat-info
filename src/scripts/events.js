@@ -1,8 +1,11 @@
 import state from '../scripts/state.js'
-import {SvgBarChart} from './grafGen.js'
+import {SvgBarChart} from './barChartController.js'
 import {filterData} from './filterData.js'
+
 function handleClick(event) {
     state.selectedCountries = event.target.id;
+    document.getElementById("selected_filters").innerText = `Filtre: ${state.selectedIndex} - ${state.selectedCountries}`
+
     console.log("Selected country: ", state.selectedCountries);
     filterData();
 
@@ -18,6 +21,8 @@ function handleClick(event) {
 
 function handleIndicator(event) {
     state.selectedIndex = event.target.id;
+    document.getElementById("selected_filters").innerText = `Filtre: ${state.selectedIndex} - ${state.selectedCountries}`
+
     filterData();
 
     const chartContainer = document.getElementById('chart_div');
@@ -44,5 +49,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         button.addEventListener('click', handleIndicator);
     });
 });
+
 
 

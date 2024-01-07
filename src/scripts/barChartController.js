@@ -1,4 +1,6 @@
 import state from './state.js'
+import {filterDataByYear} from './filterData.js'
+import {BubbleChart} from './bubbleChartController.js'
 
 export class SvgBarChart {
    
@@ -36,6 +38,7 @@ export class SvgBarChart {
             const labelValue = element["valoare"];
             const labelTime = element["an"];
             const value = element["valoare"];
+            const indicator = element["indicator"];
 
             const barHeight = value * f * 0.9;
             const barY = this.svg.clientHeight - barHeight;
@@ -46,10 +49,6 @@ export class SvgBarChart {
             bar.setAttribute('y', barY -20);
             bar.setAttribute('width', barWidth / 2);
             bar.setAttribute('height', barHeight);
-
-            bar.addEventListener('click', function(){
-                alert(labelValue);
-            })
 
             this.svg.appendChild(bar);
 
@@ -64,6 +63,34 @@ export class SvgBarChart {
             timeText.setAttribute('x', barX  + barWidth / 4);
             timeText.setAttribute('y', 500);
             this.svg.appendChild(timeText);
+
+
+            bar.addEventListener('click', function(){
+                state.selection =  element;
+                console.log("Selected: ",state.selection)
+                filterDataByYear();
+
+                const bubbleChart = new BubbleChart(document.getElementById('bubble_chart_canvas'));
+                bubbleChart.draw();
+            })
+
+           bar.addEventListener('mousemove', function(event) {
+                const tooltip = document.getElementById('tooltip');
+                const svgRect = this.getBoundingClientRect();
+                const x = event.clientX - svgRect.left; 
+                const y = event.clientY - svgRect.top;  
+            
+                tooltip.innerHTML = `<p>Index: ${indicator}</p><p>An: ${labelTime}</p><p>Valoare: ${labelValue}</p>`;
+                
+            
+                tooltip.style.display = 'block';
+                tooltip.style.left = event.clientX + 'px';
+                tooltip.style.top = event.clientY + 'px';
+            });
+            
+            bar.addEventListener('mouseout', function() {
+                document.getElementById('tooltip').style.display = 'none';
+            });
         }
 
     }

@@ -34,3 +34,12 @@
 .chart_div{
     margin-top: 20px;
 }
+
+#tooltip {
+    position: absolute;
+    display: none;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    pointer-events: none; /* Asigurați-vă că tooltip-ul nu interferează cu evenimentele mouse-ului */
+}

@@ -42,16 +42,17 @@ function createUrl(dataSet, country, year) {
 function dataParser(data, country, year, indicator) {
     const valueArray = [];
     const valueKeys = Object.keys(data.value);
-
+    let yearOffset = 0;
     for (const key of valueKeys) {
         const value = data.value[key];
         const entry = {
             tara: country,
-            an: year,
+            an: year + yearOffset,
             indicator: indicator,
             valoare: value
         };
         valueArray.push(entry);
+        yearOffset++;
     }
     return valueArray;
 }

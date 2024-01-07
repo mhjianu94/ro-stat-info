@@ -4,8 +4,10 @@ class AppState {
         this.initData = false;
         this.selectedCountries = "RO";
         this.selectedYear = 2007;
-        this.selectedIndex = null;
+        this.selectedIndex = "SV";
         this.selectedData = [];
+        this.elementSelection = {};
+        this.selectedDataByYear = [];
     }
 }
 
